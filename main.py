@@ -31,12 +31,12 @@ if __name__ == '__main__':
     start_work = 1920
     years_work = now_date.year - start_work
 
-    excel_data_if_dict3 = pandas.read_excel('wine3.xlsx',
+    wines_excel = pandas.read_excel('wine3.xlsx',
                                             sheet_name='Лист1',
                                             na_values=['N/A', 'NA'],
                                             keep_default_na=False).to_dict(orient='records')
     wine_collection = collections.defaultdict(list)
-    for index in excel_data_if_dict3:
+    for index in wines_excel:
         wine_collection[index['Категория']].append(index)
 
     rendered_page = template.render(
