@@ -118,25 +118,25 @@
             <div class="col-12 section-title text-center mb-5">
               <h2 class="d-block">{{name_wine}}</h2>
             </div>
-            {% for index in wines[name_wine] %}
+            {% for wine in wines[name_wine] %}
               <div class="col-lg-4 mb-5 col-md-6">
                 <div class="wine_v_1 text-center pb-4 pt-5">
-                  {% if index.Акция %}
-                    <img src="images/{{index.Картинка}}" alt="Image" class="img-fluid">
+                  {% if wine.Акция %}
+                    <img src="images/{{wine.Картинка}}" alt="Image" class="img-fluid">
                     <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
                   {% else %}
-                    <img src="images/{{index.Картинка}}" alt="Image" class="img-fluid">
+                    <img src="images/{{wine.Картинка}}" alt="Image" class="img-fluid">
                   {% endif %}
                   <div>
-                    <h3 class="heading mt-3 mb-3 text-dark">{{index.Название}}</h3>
-                    {% if index.Сорт %}
+                    <h3 class="heading mt-3 mb-3 text-dark">{{wine.Название}}</h3>
+                    {% if wine.Сорт %}
                       <p>
-                        Сорт винограда - {{index.Сорт}}<br/>
-                        <span class="price">{{index.Цена}}</span>
+                        Сорт винограда - {{wine.Сорт}}<br/>
+                        <span class="price">{{wine.Цена}}</span>
                       </p>
                     {% else %}
                       <p>
-                        <span class="price">{{index.Цена}}</span>
+                        <span class="price">{{wine.Цена}}</span>
                       </p>
                     {% endif %}
                   </div>

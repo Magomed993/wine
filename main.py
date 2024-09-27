@@ -36,8 +36,8 @@ if __name__ == '__main__':
                                             na_values=['N/A', 'NA'],
                                             keep_default_na=False).to_dict(orient='records')
     wine_collection = collections.defaultdict(list)
-    for index in wines_excel:
-        wine_collection[index['Категория']].append(index)
+    for wine in wines_excel:
+        wine_collection[wine['Категория']].append(wine)
 
     rendered_page = template.render(
         current_year=years_work,
