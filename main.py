@@ -10,7 +10,7 @@ def decline_years(n):
     if 11 <= n % 100 <= 19:
         return 'лет'
     else:
-        remainde = n % 100
+        remainde = n % 10
         if remainde == 1:
             return 'год'
         elif 2 <= remainde <= 4:
