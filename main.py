@@ -3,8 +3,12 @@ import collections
 import datetime
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import pandas
+import argparse
+from environs import Env
 
 
+envi = Env()
+envi.read_env()
 
 def decline_years(n):
     if 11 <= n % 100 <= 19:
@@ -20,6 +24,7 @@ def decline_years(n):
 
 
 if __name__ == '__main__':
+    wines = envi.str('WINES')
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
@@ -31,10 +36,14 @@ if __name__ == '__main__':
     start_work = 1920
     years_work = now_date.year - start_work
 
-    wines_excel = pandas.read_excel('wine3.xlsx',
-                                            sheet_name='Лист1',
-                                            na_values=['N/A', 'NA'],
-                                            keep_default_na=False).to_dict(orient='records')
+    parser = argparse.ArgumentParser(description='Если ваш файл находится не в папке с кодом, то вы можете ввести путь к нему дополнительным аргументом')
+    parser.add_argument('--path', default=wines, help='Путь')
+    args = parser.parse_args()
+
+    wines_excel = pandas.read_excel(args.path,
+                                    sheet_name='Лист1',
+                                    na_values=['N/A', 'NA'],
+                                    keep_default_na=False).to_dict(orient='records')
     wine_collection = collections.defaultdict(list)
     for wine in wines_excel:
         wine_collection[wine['Категория']].append(wine)
