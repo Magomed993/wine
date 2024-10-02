@@ -1,14 +1,13 @@
+import os
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import collections
 import datetime
+
+from dotenv import load_dotenv
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import pandas
 import argparse
-from environs import Env
 
-
-envi = Env()
-envi.read_env()
 
 def decline_years(n):
     if 11 <= n % 100 <= 19:
@@ -24,7 +23,8 @@ def decline_years(n):
 
 
 if __name__ == '__main__':
-    wines = envi.str('WINES')
+    load_dotenv()
+    excel_path = os.environ['EXCEL_PATH']
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     years_work = now_date.year - start_work
 
     parser = argparse.ArgumentParser(description='Если ваш файл находится не в папке с кодом, то вы можете ввести путь к нему дополнительным аргументом')
-    parser.add_argument('--path', default=wines, help='Путь')
+    parser.add_argument('--path', default=excel_path, help='Путь')
     args = parser.parse_args()
 
     wines_excel = pandas.read_excel(args.path,
@@ -52,7 +52,7 @@ if __name__ == '__main__':
         current_year=years_work,
         word_year=decline_years(years_work),
         wines=wine_collection,
-        name_collections=wine_collection.keys()
+        collection_name=wine_collection.keys()
     )
 
     with open('index.html', 'w', encoding="utf8") as file:

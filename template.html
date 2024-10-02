@@ -114,11 +114,11 @@
           </div>
         </div>
         <div class="row">
-          {% for name_wine in name_collections %}
+          {% for wine_name in collection_name %}
             <div class="col-12 section-title text-center mb-5">
-              <h2 class="d-block">{{name_wine}}</h2>
+              <h2 class="d-block">{{wine_name}}</h2>
             </div>
-            {% for wine in wines[name_wine] %}
+            {% for wine in wines[wine_name] %}
               <div class="col-lg-4 mb-5 col-md-6">
                 <div class="wine_v_1 text-center pb-4 pt-5">
                   {% if wine.Акция %}
