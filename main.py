@@ -52,7 +52,7 @@ if __name__ == '__main__':
         current_year=years_work,
         word_year=decline_years(years_work),
         wines=wine_collection,
-        collection_name=wine_collection.keys()
+        collection_names=wine_collection.keys()
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
